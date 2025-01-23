@@ -1,11 +1,15 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router'
+import { FavoritesContext } from '../../context/FavoritesContext'
+import { FaHeart } from 'react-icons/fa'
 
 function Products() {
     const [products, setProducts] = useState([])
+    const navigate = useNavigate()
     
     const [searchName, setSearchName] = useState("")
+    const {favorites,addToFavorites} = useContext(FavoritesContext)
 
      function getProducts(){
         axios.get("http://localhost:3000/products")
@@ -21,11 +25,15 @@ function Products() {
         setSearchName(e.target.value)
      
     }
+    function btnFavorite(prodId){
+        return favorites.some((favorite) => favorite._id === prodId)
+    }
     
   return (
     <>
+    
       <div className='containerCards'>
-        <input className='searchInput' type="text" placeholder='search for title' value={searchName} onChange={handleSearchChange}/>
+        <input className='searchInput' type="text" placeholder='Search for title' value={searchName} onChange={handleSearchChange}/>
             <div className="cards">
                 {products
                 .filter(x=>x.title.toLowerCase().includes(searchName.toLowerCase()))
@@ -35,8 +43,8 @@ function Products() {
                     <p>{product.title}</p>
                     <span>${product.price}</span>
                     <div className="cardBtn">
-                        <Link to={"/:id"}><button className='.btnDetail' style={{backgroundColor:"blue", color:"white", padding:"10px 20px", border:"none", borderRadius:"5px"}}>Detail</button></Link>
-                        <button className='.btnFavorite' style={{backgroundColor:"red", color:"white", padding:"10px 20px", border:"none", borderRadius:"5px"}}>Favorite</button>
+                        <button onClick={()=>navigate(`/detail/:id`)} className='.btnDetail' style={{backgroundColor:"blue", color:"white", padding:"10px 20px", border:"none", borderRadius:"5px"}}>Detail</button>
+                        <button className="btnFavorite" style={{backgroundColor:"white", color:'red', border:'none', fontSize:'25px'}} onClick={() =>addToFavorites(product)}><FaHeart/></button>
                     </div>
                 </div>
                 ))}

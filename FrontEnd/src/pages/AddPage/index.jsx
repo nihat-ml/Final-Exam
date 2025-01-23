@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FaTrash } from "react-icons/fa";
 import axios from "axios"
+import {Helmet} from "react-helmet"
 
 
 
@@ -60,6 +61,9 @@ function AddPage() {
     });
     return (
         <>
+            <Helmet>
+                <title>Add Page</title>
+            </Helmet>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input

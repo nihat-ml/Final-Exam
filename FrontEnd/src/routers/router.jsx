@@ -16,7 +16,7 @@ export let ROUTES = [
                 element:<Home/>
             },
             {
-                path:"/:id",
+                path:"/detail/:id",
                 element:<Detail/>
             },
             {

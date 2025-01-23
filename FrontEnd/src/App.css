@@ -102,7 +102,8 @@ form{
     align-items: center;
     flex-wrap: wrap;
     .card{
-      width: 25%;
+      max-width: 300px;
+
       height: 100%;
       margin: 20px 10px;
       text-align: center;
@@ -129,8 +130,29 @@ form{
 }
 .searchInput{
   background-color: white;
+  width: 85%;
+  font-size: 20px;
   color: black;
   padding: 20px 10px;
   display: flex;
   margin: 0 auto;
+}
+.blogs{
+  background-color: rgba(255, 252, 252, 0.923);
+  margin: 0 auto;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .blog{
+      max-width: 300px;
+
+      height: 100%;
+      margin: 20px 10px;
+      text-align: center;
+      margin: 0px 50px;
+      img{
+        width: 100%;
+      }
+    }
 }
